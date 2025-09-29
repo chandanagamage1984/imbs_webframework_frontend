@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>{{ isEditMode ? 'edit' : 'add' }}</mat-icon>
+      {{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter employee name">
+        <mat-error *ngIf="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched">
+          {{ getErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Position</mat-label>
+        <input matInput formControlName="position" placeholder="Enter position">
+        <mat-error *ngIf="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched">
+          {{ getErrorMessage('position') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Department</mat-label>
+        <input matInput formControlName="department" placeholder="Enter department">
+        <mat-error *ngIf="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched">
+          {{ getErrorMessage('department') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Salary</mat-label>
+        <input matInput type="number" formControlName="salary" placeholder="Enter salary">
+        <mat-error *ngIf="employeeForm.get('salary')?.invalid && employeeForm.get('salary')?.touched">
+          {{ getErrorMessage('salary') }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
+          Cancel
+        </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="employeeForm.invalid || loading">
+          <mat-icon *ngIf="loading">hourglass_empty</mat-icon>
+          {{ isEditMode ? 'Update' : 'Create' }} Employee
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
