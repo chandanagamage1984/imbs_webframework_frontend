@@ -1,22 +1,28 @@
 export interface Employee {
-  id: number
-  name: string
-  position: string
-  department: string
-  salary: number
+    employeeId: number;
+    name: string;
+    email: string;
+    phone: string;
+    salary: number;
+    departmentId: number;
+    departmentName?: string;
+    location?: string;
 }
 
-export interface CreateEmployeeRequest {
-  name: string
-  position: string
-  department: string
-  salary: number
+export interface EmployeeWithDepartment {
+    employeeId: number;
+    name: string;
+    email: string;
+    phone: string;
+    salary: number;
+    departmentName: string;
+    location: string;
 }
 
-export interface UpdateEmployeeRequest {
-  id: number
-  name: string
-  position: string
-  department: string
-  salary: number
+export interface EmployeeInput {
+    name: string;
+    email: string;
+    phone: string;
+    salary: number;
+    departmentId: number;
 }

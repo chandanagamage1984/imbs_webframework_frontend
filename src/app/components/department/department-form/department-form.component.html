@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>
+    {{ isEditMode ? 'Edit Department' : 'Add New Department' }}
+</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="departmentForm" class="department-form">
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Department Name</mat-label>
+                <input matInput formControlName="name" placeholder="Enter department name">
+                <mat-icon matSuffix>business</mat-icon>
+                <mat-error *ngIf="name?.hasError('required')">
+                    Department name is required
+                </mat-error>
+                <mat-error *ngIf="name?.hasError('minlength')">
+                    Department name must be at least 2 characters long
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Location</mat-label>
+                <input matInput formControlName="location" placeholder="Enter location">
+                <mat-icon matSuffix>location_on</mat-icon>
+                <mat-error *ngIf="location?.hasError('required')">
+                    Location is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="departmentForm.invalid || isLoading">
+        <span *ngIf="isLoading" class="button-loading">
+            <mat-spinner diameter="20"></mat-spinner>
+        </span>
+        <span *ngIf="!isLoading">
+            {{ isEditMode ? 'Update' : 'Create' }}
+        </span>
+    </button>
+</mat-dialog-actions>

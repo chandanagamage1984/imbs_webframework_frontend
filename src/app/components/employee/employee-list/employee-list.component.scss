@@ -1,0 +1,80 @@
+.container {
+    padding: 20px;
+}
+
+mat-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.search-field {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-btn,
+.clear-btn {
+    height: 56px;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.table-container {
+    position: relative;
+    min-height: 200px;
+}
+
+table {
+    width: 100%;
+}
+
+.no-data {
+    text-align: center;
+    padding: 50px;
+    color: #666;
+
+    mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+    }
+}
+
+.mat-column-actions {
+    width: 120px;
+    text-align: center;
+}
+
+.mat-column-employeeId {
+    width: 80px;
+}
+
+.mat-column-salary {
+    width: 120px;
+}
+
+@media (max-width: 768px) {
+    .search-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-field {
+        min-width: unset;
+    }
+}

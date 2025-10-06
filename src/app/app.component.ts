@@ -1,15 +1,33 @@
-import { Component } from "@angular/core"
-import { RouterOutlet } from "@angular/router"
-import { MatToolbarModule } from "@angular/material/toolbar"
-import { MatIconModule } from "@angular/material/icon"
+import { Component, ViewChild } from "@angular/core"
+import { CommonModule } from "@angular/common"
+import { RouterModule } from "@angular/router"
+
+// Angular Material Imports
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, MatToolbarModule, MatIconModule],
+  imports: [CommonModule,
+    RouterModule,
+    // Material Modules:
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,],
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = "Employee's Management System"
+  title = "Employee's Management System";
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+  navItems = [
+    { path: '/employees', icon: 'people', label: 'Employees' },
+    { path: '/departments', icon: 'business', label: 'Departments' },
+  ];
 }

@@ -1,0 +1,94 @@
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Department Management</mat-card-title>
+            <button mat-raised-button color="primary" (click)="openDepartmentForm()">
+                <mat-icon>add</mat-icon> Add Department
+            </button>
+        </mat-card-header>
+
+        <mat-card-content>
+            <!-- Search Section -->
+            <div class="search-section">
+                <mat-form-field appearance="outline" class="search-field">
+                    <mat-label>Search by name or location</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="search-field">
+                    <mat-label>Department ID</mat-label>
+                    <input matInput type="number" [(ngModel)]="searchDepartmentId" placeholder="Enter Department ID">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="search-field">
+                    <mat-label>Department Name</mat-label>
+                    <input matInput [(ngModel)]="searchName" placeholder="Enter department name">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)="searchDepartments()" class="search-btn">
+                    <mat-icon>search</mat-icon> Search
+                </button>
+
+                <button mat-button (click)="clearSearch()" class="clear-btn">
+                    <mat-icon>clear</mat-icon> Clear
+                </button>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div *ngIf="isLoading" class="loading-spinner">
+                <mat-spinner></mat-spinner>
+            </div>
+
+            <!-- Departments Table -->
+            <div class="table-container" *ngIf="!isLoading">
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                    <!-- Department ID Column -->
+                    <ng-container matColumnDef="departmentId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                        <td mat-cell *matCellDef="let department">{{department.departmentId}}</td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                        <td mat-cell *matCellDef="let department">{{department.name}}</td>
+                    </ng-container>
+
+                    <!-- Location Column -->
+                    <ng-container matColumnDef="location">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+                        <td mat-cell *matCellDef="let department">{{department.location}}</td>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>Actions</th>
+                        <td mat-cell *matCellDef="let department">
+                            <button mat-icon-button color="primary" (click)="openDepartmentForm(department)"
+                                matTooltip="Edit">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" (click)="deleteDepartment(department)"
+                                matTooltip="Delete">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+                <!-- No data message -->
+                <div *ngIf="dataSource.data.length === 0" class="no-data">
+                    <mat-icon>info</mat-icon>
+                    <p>No departments found</p>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
